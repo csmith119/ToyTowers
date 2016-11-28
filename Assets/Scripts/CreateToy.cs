@@ -15,6 +15,7 @@ public class CreateToy : MonoBehaviour {
 		Object prefab = PrefabUtility.CreateEmptyPrefab(prefabPath);
 		//Replaces empty prefab with gameObject Toy
 		PrefabUtility.ReplacePrefab (toy, prefab);
-		//SceneManager.LoadScene ("Scene_1");
+		toy.tag = "Toy";
+		SceneManager.LoadScene ("Scene_1");
 	}
 }

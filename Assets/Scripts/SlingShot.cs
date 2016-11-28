@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEditor;
 using System.Collections;
 
 public class SlingShot : MonoBehaviour {
@@ -10,7 +11,24 @@ public class SlingShot : MonoBehaviour {
 	public GameObject launchPoint;
 	public Vector3 launchPos;
 	public GameObject projectile;
+	private Object toyPrefab;
 	public bool aimingMode;
+
+	void Start(){
+		//GameObject toy = 
+		toyPrefab = AssetDatabase.LoadAssetAtPath 
+			("Assets/Prefabs/Toy.prefab", typeof(GameObject) );
+		prefabProjectile = Instantiate (toyPrefab) as GameObject;
+
+		prefabProjectile.transform.position = new Vector3 (0,0,0);
+
+		prefabProjectile.AddComponent<Rigidbody>();
+		prefabProjectile.tag = "Toy";
+
+		projectile.GetComponent<Rigidbody>().isKinematic = true;
+		projectile.GetComponent<Rigidbody> ().useGravity = false;
+		projectile = prefabProjectile;
+	}
 
 	void Update() {
 		if (!aimingMode)
@@ -19,6 +37,8 @@ public class SlingShot : MonoBehaviour {
 		mousePos2D.z = -Camera.main.transform.position.z;
 		Vector3 mousePos3D = Camera.main.ScreenToWorldPoint (mousePos2D);
 		Vector3 mouseDelta = mousePos3D - launchPos;
+//		Debug.Log ("mouse pos " + mousePos3D);
+//		Debug.Log ("launch pos " + launchPos);
 		float maxMagnitude = this.GetComponent<SphereCollider> ().radius;
 		if (mouseDelta.magnitude > maxMagnitude){
 			mouseDelta.Normalize();
@@ -31,7 +51,8 @@ public class SlingShot : MonoBehaviour {
 			aimingMode = false;
 			projectile.GetComponent<Rigidbody>().isKinematic = false;
 			projectile.GetComponent<Rigidbody> ().velocity = -mouseDelta * velocityMult;
-			FollowCam.S.poi = projectile;
+//			Debug.Log (" player projectile mouseDelta" + mouseDelta);
+			//FollowCam.S.poi = projectile;
 			projectile = null;
 			MissionDemolition.ShotsFired ();
 		}

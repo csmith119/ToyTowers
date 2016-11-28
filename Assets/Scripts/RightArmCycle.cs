@@ -10,6 +10,10 @@ public class RightArmCycle : ToyCycle  {
 		//Sets the array of sprites with the Right Arm Sprites from Assets
 		parts = Resources.LoadAll<Sprite> (pathToAssets);
 	}
+	void Update(){
+		//Sets the array of sprites with the RightArm Sprites from Assets
+		parts = Resources.LoadAll<Sprite> (pathToAssets);
+	}
 
 	//Uses the move part forward method of parent class with Right Arm sprites and Right Arm object
 	public void OnClickHeadForward(){

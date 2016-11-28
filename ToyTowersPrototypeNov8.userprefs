@@ -1,10 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NewFriend.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/EnemyAI.cs">
     <Files>
-      <File FileName="Assets/Scripts/NewFriend.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/LeftLegCycle.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/HeadCycle.cs" Line="15" Column="3" />
+      <File FileName="Assets/Scripts/MissionDemolition.cs" Line="42" Column="19" />
+      <File FileName="Assets/Scripts/SlingShot.cs" Line="63" Column="3" />
+      <File FileName="Assets/Scripts/ProjectileLine.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/EnemyAI.cs" Line="33" Column="1" />
+      <File FileName="Assets/Scripts/FollowCam.cs" Line="44" Column="69" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

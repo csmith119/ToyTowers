@@ -10,15 +10,17 @@ public class LeftArmCycle : ToyCycle  {
 		//Sets the array of sprites with the LeftArm Sprites from Assets
 		parts = Resources.LoadAll<Sprite> (pathToAssets);
 	}
+	void Update(){
+		//Sets the array of sprites with the LeftArm Sprites from Assets
+		parts = Resources.LoadAll<Sprite> (pathToAssets);
+	}
 
 	//Uses the move part forward method of parent class with LeftArm sprites and LeftArm object
 	public void OnClickHeadForward(){
 		OnButtonChangePartForward (parts, targetObject);
-		Debug.Log ("Forward");
 	}
 	//Uses the move part backward method of parent class with LeftArm sprites and LeftArm object	
 	public void OnClickHeadBackward(){
 		OnButtonChangePartBackward (parts, targetObject);
-		Debug.Log ("Backward");
 	}
 }

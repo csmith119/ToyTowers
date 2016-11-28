@@ -13,14 +13,16 @@ public class MissionDemolition : MonoBehaviour {
 	public GameObject[] castles;
 	public GUIText gtLevel;
 	public GUIText gtScore;
-	public Vector3 castlePos;
+	public Vector3 enemyCastlePos = new Vector3 (50f, -9.5f, 0);
+	public Vector3 playerCastlePos;
 
 	public bool  _____________;
 
 	public int level;
 	public int levelMax;
 	public int shotsTaken;
-	public GameObject castle;
+	public GameObject enemyCastle;
+	public GameObject playerCastle;
 	public Gamemode mode = Gamemode.idle;
 	public string showing = "Slingshot";
 
@@ -33,26 +35,38 @@ public class MissionDemolition : MonoBehaviour {
 	}
 
 	void StartLevel(){
-		if (castle != null) {
-			Destroy (castle);
+		if (enemyCastle != null) {
+			Destroy (enemyCastle);
 		}
+		if (playerCastle != null) {
+			Destroy (playerCastle);
+		}
+
 
 		GameObject[] gos = GameObject.FindGameObjectsWithTag ("Projectile");
 		foreach (GameObject pTemp in gos) {
 			Destroy (pTemp);
 		}
 
-		castle = Instantiate (castles [level]) as GameObject;
-		castle.transform.position = castlePos;
+		enemyCastle = Instantiate (castles [level]) as GameObject;
+		enemyCastle.tag = "enemyBlock";
+//		foreach (Transform t in transform) {
+//			t.gameObject.tag = "enemyBlock";
+//		}
+		enemyCastlePos = new Vector3 (50f, -9.5f, 0);
+		enemyCastle.transform.position = enemyCastlePos;
+
+		playerCastle = Instantiate (castles [level]) as GameObject;
+		playerCastle.tag = "playerBlock";
+		playerCastlePos = enemyCastlePos;
+		playerCastlePos.x = -enemyCastlePos.x;
+		playerCastle.transform.position = playerCastlePos;
+
 		shotsTaken = 0;
-
-		SwitchView ("Both");
-		ProjectileLine.S.Clear ();
-
+		//SwitchView ("Both");
+		//ProjectileLine.S.Clear ();
 		Goal.goalMet = false;
-
 		ShowGT ();
-
 		mode = Gamemode.playing;
 	}
 
@@ -67,9 +81,7 @@ public class MissionDemolition : MonoBehaviour {
 
 		if (mode == Gamemode.playing && Goal.goalMet) {
 			mode  = Gamemode.levelEnd;
-
-			SwitchView ("Both");
-
+			//SwitchView ("Both");
 			Invoke ("NextLevel", 2f);
 		}
 	
@@ -85,41 +97,41 @@ public class MissionDemolition : MonoBehaviour {
 	void OnGUI(){
 		Rect buttonRect = new Rect ((Screen.width / 2) - 5, 10, 100, 24);
 
-		switch (showing) {
-		case "SlingShot":
-			if (GUI.Button (buttonRect, "Show Castle")) {
-				SwitchView ("Castle");
-			}
-			break;
-
-		case "Castle":
-			if (GUI.Button (buttonRect, "Show Both")) {
-				SwitchView ("Both");
-			}
-			break;
-		case "Both":
-			if (GUI.Button (buttonRect, "Show Slingshot")) {
-				SwitchView ("Slingshot");
-			}
-			break;
-		}
+//		switch (showing) {
+//		case "SlingShot":
+//			if (GUI.Button (buttonRect, "Show Castle")) {
+//				SwitchView ("Castle");
+//			}
+//			break;
+//
+//		case "Castle":
+//			if (GUI.Button (buttonRect, "Show Both")) {
+//				SwitchView ("Both");
+//			}
+//			break;
+//		case "Both":
+//			if (GUI.Button (buttonRect, "Show Slingshot")) {
+//				SwitchView ("Slingshot");
+//			}
+//			break;
+//		}
 	}
 
-	static public void SwitchView( string eView){
-		S.showing = eView;
-		switch (S.showing) {
-		case "Slingshot":
-			FollowCam.S.poi = null;
-			break;
-
-		case "Castle":
-			FollowCam.S.poi = S.castle;
-			break;
-		case "Both":
-			FollowCam.S.poi = GameObject.Find ("ViewBoth");
-			break;
-		}
-	}
+//	static public void SwitchView( string eView){
+//		S.showing = eView;
+//		switch (S.showing) {
+//		case "Slingshot":
+//			FollowCam.S.poi = null;
+//			break;
+//
+//		case "Castle":
+//			FollowCam.S.poi = S.enemyCastle;
+//			break;
+//		case "Both":
+//			FollowCam.S.poi = GameObject.Find ("ViewBoth");
+//			break;
+//		}
+//	}
 	public static void ShotsFired(){
 		S.shotsTaken++;
 	}

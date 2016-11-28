@@ -10,6 +10,10 @@ public class BodyCycle : ToyCycle  {
 		//Sets the array of sprites with the Body Sprites from Assets
 		parts = Resources.LoadAll<Sprite> (pathToAssets);
 	}
+	void Update(){
+		//Sets the array of sprites with the Body Sprites from Assets
+		parts = Resources.LoadAll<Sprite> (pathToAssets);
+	}
 
 	//Uses the move part forward method of parent class with Body sprites and Body object
 	public void OnClickHeadForward(){

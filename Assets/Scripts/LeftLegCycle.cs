@@ -11,6 +11,10 @@ public class LeftLegCycle : ToyCycle  {
 		//Sets the array of sprites with the Left Leg Sprites from Assets
 		parts = Resources.LoadAll<Sprite> (pathToAssets);
 	}
+	void Update(){
+		//Sets the array of sprites with the LeftArm Sprites from Assets
+		parts = Resources.LoadAll<Sprite> (pathToAssets);
+	}
 
 	//Uses the move part forward method of parent class with Left Leg sprites and LeftLeg object
 	public void OnClickHeadForward(){
