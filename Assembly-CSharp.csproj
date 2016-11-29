@@ -63,7 +63,6 @@
      <Compile Include="Assets\Scripts\SlingShot.cs" />
      <Compile Include="Assets\Scripts\Toy.cs" />
      <Compile Include="Assets\Scripts\ToyCycle.cs" />
-     <None Include="Assets\Wood texture floor_01\readme.txt" />
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
