@@ -99,6 +99,7 @@
 'Assets/Scripts/RightLegCycle.cs'
 'Assets/Scripts/ShowToy.cs'
 'Assets/Scripts/SlingShot.cs'
+'Assets/Scripts/TitleScript.cs'
 'Assets/Scripts/Toy.cs'
 'Assets/Scripts/ToyCycle.cs'
 -r:'/Applications/Unity/Unity.app/Contents/Mono/lib/mono/unity/System.Runtime.Serialization.dll'

@@ -16,16 +16,14 @@ public class NewFriend : MonoBehaviour {
 	//new location, respectively. 
 	private const string oldFolder = "Assets/Resources/Sprites/toyParts/FriendParts/";
 	private const string newFolder = "Assets/Resources/Sprites/toyParts/";
-	//Creates an empty list which will contain the strings from Keys once they have been used. It will be used
-	// for resetting the toy parts. 
-	private List<string> usedKeys = new List <string>();
-	//Creates a list which holds all of the keys for the movePaths Dictionary
-	private List<string> Keys = new List <string> {oldFolder + "duckHead.png",
-		oldFolder + "wingLeftArm.png",oldFolder + "wingRightArm.png",oldFolder + "dragonHead.png",
-		oldFolder + "heavyHitterBody.png", oldFolder + "jacksBody.png", oldFolder + "rainbowWheelLeftLeg.png",
-		oldFolder + "rainbowWheelRightLeg.png", oldFolder + "rocketLeftLeg.png", oldFolder + "rocketRightLeg.png",
-		oldFolder + "rollerRightLeg.png", oldFolder + "rollerLeftLeg.png",
-		oldFolder + "springLeftArm.png", oldFolder + "springRightArm.png", oldFolder + "turtleBody.png"};
+	//Creates a string containing all used Toy parts. It will be used to reset them.  
+	private string usedKeys;
+	//Creates a string holding all available keys from PlayerPrefs in a CSV
+	private string commaKeys;
+	//Creates an array and a list to temporarily store and manage these keys
+	private string[] arrayKeys;
+	private List<string> Keys = new List<string>(); 
+
 	//Creates a dictionary, where the key is the original location of the toy part and the value holds 
 	//the location of where those parts should end up once they've been gained by the user. 
 	private Dictionary<string, string> movePaths = new Dictionary <string,string> {
@@ -49,13 +47,22 @@ public class NewFriend : MonoBehaviour {
 	void Start () {
 		friendsPanel.SetActive (false);
 		message = friendsMessage.GetComponent<Text> ();
+
+		//sets variables from player prefs
+		usedKeys = PlayerPrefs.GetString("used");
+		commaKeys = PlayerPrefs.GetString ("keys");	
+
+		//Creates a list holding all available keys
+		arrayKeys = commaKeys.Split (',');
+		for (int i = 0; i < arrayKeys.Length; i++) {
+			Keys.Add (arrayKeys [i]);
+		}
+		Debug.Log ("count :" + Keys.Count);
 	}
 
 	//Adds new toy part into cycles
 	public void addToyPart(){
 		int index = Random.Range(0, Keys.Count);
-		Debug.Log (index);
-		Debug.Log (Keys.Count);
 		//Gets key from list and then removes it from the keys so it can't be accessed again
 		string oldPathKey = Keys[index];
 		Keys.RemoveAt (index);
@@ -65,8 +72,9 @@ public class NewFriend : MonoBehaviour {
 		string move= "Didn't Work";
 		move = AssetDatabase.MoveAsset (oldPathKey, newPathValue);
 		Debug.Log (move);
-		//Adds the key for the move to the UsedKeys List
-		usedKeys.Add(oldPathKey);
+		//Adds the key for the move to the UsedKeys String and sets it
+		usedKeys= usedKeys + "," +  oldPathKey + "," + newPathValue;
+		PlayerPrefs.SetString ("used", usedKeys);
 	}
 
 	//Simulates earning enough points to gain a friend
@@ -81,9 +89,9 @@ public class NewFriend : MonoBehaviour {
 			message.text = "YOU'VE EARNED NO FRIENDS. TRY HARDER!";
 		} else {
 			message.text = "YOU'VE EARNED " + friendsEarned + " FRIENDS. WAY COOL!";
-		}
-		for (int i = 0; i < friendsEarned; i++) {
-			addToyPart ();
+			for (int i = 0; i < friendsEarned; i++) {
+				addToyPart ();
+			}
 		}
 	}
 
@@ -91,15 +99,5 @@ public class NewFriend : MonoBehaviour {
 	public void toToyAssembly(){
 		SceneManager.LoadScene ("ToyAssembly");
 	}
-
-	//Moves the toy parts back to their original folder
-	public void resetToys(){
-		//Goes through each item of usedKeys and uses the string to access the dictionary and set back the 
-		//toy parts
-		for (int i = 0; i < usedKeys.Count; i++) {
-			string resetKey = usedKeys [i];
-			string resetValue = movePaths[resetKey];
-			string moveBack = AssetDatabase.MoveAsset (resetValue, resetKey);
-		}
-	}
+		
 }

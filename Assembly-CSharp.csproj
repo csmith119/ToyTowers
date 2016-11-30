@@ -61,6 +61,7 @@
      <Compile Include="Assets\Scripts\RightLegCycle.cs" />
      <Compile Include="Assets\Scripts\ShowToy.cs" />
      <Compile Include="Assets\Scripts\SlingShot.cs" />
+     <Compile Include="Assets\Scripts\TitleScript.cs" />
      <Compile Include="Assets\Scripts\Toy.cs" />
      <Compile Include="Assets\Scripts\ToyCycle.cs" />
  <Reference Include="UnityEngine.Networking">
