@@ -1,9 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 //Coded by Christy Smith
 public class NewFriend : MonoBehaviour {
+	//Panel that displays friends 
+	[SerializeField] GameObject friendsPanel;
+	[SerializeField] GameObject friendsMessage;
+	Text message;
+	//Count of how many Friends have been earned 
+	private int friendsEarned=0;
 	//The constant strings hold the folder path that is universal to the toy parts original location and the
 	//new location, respectively. 
 	private const string oldFolder = "Assets/Resources/Sprites/toyParts/FriendParts/";
@@ -37,6 +45,12 @@ public class NewFriend : MonoBehaviour {
 		{oldFolder + "springRightArm.png", newFolder + "RightArms/springRightArm.png"},
 		{oldFolder + "turtleBody.png", newFolder + "Bodies/turtleBody.png"}};
 
+	// Use this for initialization
+	void Start () {
+		friendsPanel.SetActive (false);
+		message = friendsMessage.GetComponent<Text> ();
+	}
+
 	//Adds new toy part into cycles
 	public void addToyPart(){
 		int index = Random.Range(0, Keys.Count);
@@ -53,6 +67,29 @@ public class NewFriend : MonoBehaviour {
 		Debug.Log (move);
 		//Adds the key for the move to the UsedKeys List
 		usedKeys.Add(oldPathKey);
+	}
+
+	//Simulates earning enough points to gain a friend
+	public void addFriend(){
+		friendsEarned++;
+	}
+
+	//Shows the friends pane to simulate all the blocks being tagged
+	public void gameOver(){
+		friendsPanel.SetActive (true);
+		if (friendsEarned == 0) {
+			message.text = "YOU'VE EARNED NO FRIENDS. TRY HARDER!";
+		} else {
+			message.text = "YOU'VE EARNED " + friendsEarned + " FRIENDS. WAY COOL!";
+		}
+		for (int i = 0; i < friendsEarned; i++) {
+			addToyPart ();
+		}
+	}
+
+	//Changes to ToyAssembly Scene 
+	public void toToyAssembly(){
+		SceneManager.LoadScene ("ToyAssembly");
 	}
 
 	//Moves the toy parts back to their original folder
