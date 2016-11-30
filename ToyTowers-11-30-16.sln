@@ -1,7 +1,7 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
-Project("{64661C1B-52E2-11B7-3C45-97CA42AA6B6A}") = "ToyTowers-most recent", "Assembly-CSharp.csproj", "{3BA87055-6D14-680A-4222-4064C49DC10B}"
+Project("{85ADED7C-C7C5-93BA-FC2B-26FB2A2C11A1}") = "ToyTowers-11-30-16", "Assembly-CSharp.csproj", "{6670B555-AB22-3DC8-8E94-6314184D9912}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3BA87055-6D14-680A-4222-4064C49DC10B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3BA87055-6D14-680A-4222-4064C49DC10B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3BA87055-6D14-680A-4222-4064C49DC10B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3BA87055-6D14-680A-4222-4064C49DC10B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6670B555-AB22-3DC8-8E94-6314184D9912}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6670B555-AB22-3DC8-8E94-6314184D9912}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6670B555-AB22-3DC8-8E94-6314184D9912}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6670B555-AB22-3DC8-8E94-6314184D9912}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

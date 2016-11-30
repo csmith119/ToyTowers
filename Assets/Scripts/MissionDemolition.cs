@@ -47,17 +47,8 @@ public class MissionDemolition : MonoBehaviour {
 
 		enemyCastle = Instantiate (castles [level]) as GameObject;
 		enemyCastle.tag = "enemyBlock";
-//		foreach (Transform t in transform) {
-//			t.gameObject.tag = "enemyBlock";
-//		}
 		enemyCastlePos = new Vector3 (50f, -9.5f, 0);
 		enemyCastle.transform.position = enemyCastlePos;
-		//transform.FindChild
-//		Object[] enemyChildren = enemyCastle.GetComponentsInChildren<Object> ();
-//		foreach (Object child in enemyChildren){
-//			child.tag = enemyCastle.tag;
-//			Debug.Log ("child " + child.name);
-//		}
 
 		playerCastle = Instantiate (castles [level]) as GameObject;
 		playerCastle.tag = "playerBlock";

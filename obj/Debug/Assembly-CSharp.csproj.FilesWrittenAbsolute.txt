@@ -135,3 +135,20 @@
 /Users/agoslen2/Desktop/ToyTowers-most recent/Temp/bin/Debug/Mono.Cecil.Mdb.dll
 /Users/agoslen2/Desktop/ToyTowers-most recent/Temp/bin/Debug/Assembly-CSharp.dll.mdb
 /Users/agoslen2/Desktop/ToyTowers-most recent/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/agoslen2/Desktop/ToyTowers-11-30-16/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/agoslen2/Desktop/ToyTowers-11-30-16/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/agoslen2/Desktop/ToyTowers-11-30-16/obj/Debug/Assembly-CSharp.dll
+/Users/agoslen2/Desktop/ToyTowers-11-30-16/obj/Debug/Assembly-CSharp.dll.mdb
+/Users/agoslen2/Desktop/ToyTowers-11-30-16/Temp/bin/Debug/UnityEngine.dll
+/Users/agoslen2/Desktop/ToyTowers-11-30-16/Temp/bin/Debug/UnityEditor.dll
+/Users/agoslen2/Desktop/ToyTowers-11-30-16/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/agoslen2/Desktop/ToyTowers-11-30-16/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/agoslen2/Desktop/ToyTowers-11-30-16/Temp/bin/Debug/Mono.Cecil.dll
+/Users/agoslen2/Desktop/ToyTowers-11-30-16/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/agoslen2/Desktop/ToyTowers-11-30-16/Temp/bin/Debug/Unity.DataContract.dll
+/Users/agoslen2/Desktop/ToyTowers-11-30-16/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/agoslen2/Desktop/ToyTowers-11-30-16/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/agoslen2/Desktop/ToyTowers-11-30-16/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/agoslen2/Desktop/ToyTowers-11-30-16/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/agoslen2/Desktop/ToyTowers-11-30-16/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/agoslen2/Desktop/ToyTowers-11-30-16/Temp/bin/Debug/Mono.Cecil.Mdb.dll
