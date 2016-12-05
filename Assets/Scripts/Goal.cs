@@ -8,9 +8,13 @@ public class Goal : MonoBehaviour {
 		if (other.gameObject.tag == "enemyToy" | other.gameObject.tag == "playerToy") {
 			Goal.goalMet = true;
 			//Calculate score at the end of a level
-			Toy t = other.gameObject.GetComponent<Toy> ();
-			int numFriendsToAdd = t.CalcNewFriends (t.playerScore, t.enemyScore);
+			GameObject camera = GameObject.Find ("Main Camera");
+			MissionDemolition md = camera.GetComponent<MissionDemolition> ();
+			//Toy t = other.gameObject.GetComponent<Toy> ();
+			int numFriendsToAdd = md.CalcNewFriends (md.scores["player"], md.scores["enemy"]);
 			Debug.Log ("Number of Friends to Add " + numFriendsToAdd);
+			md.scores ["player"] = 0;
+			md.scores ["enemy"] = 0;
 			//Call New Friends
 
 			//Destroy all enemy toys from previous level
@@ -36,11 +40,12 @@ public class Goal : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 }
+

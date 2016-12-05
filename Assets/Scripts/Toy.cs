@@ -3,24 +3,30 @@ using UnityEditor;
 using System.Collections;
 using UnityEngine.SceneManagement;
 //Alex Goslen, Will Timpson
-public class Toy : MonoBehaviour {
+public class Toy : MonoBehaviour  {
 
 
 	private float speed = 12.4f;
 	private Vector3 projPos;
-	private int divValue = 1000;
+	public int divValue;
 	private float randomWidth;
-	private float range = 100f;
+	public float range;
 	private int changeInScore = 10;
 	public int playerScore = 0;
 	public int enemyScore = 0;
+
+
+	public Toy(int aDivValue, float aRange) {
+		divValue = aDivValue;
+		range = aRange;
+	}
 	// Use this for initialization
 	void Start () {
 		//creates random arc with for Enemies Toys
 		float rw = Random.value * divValue;
 		randomWidth = Random.Range(rw - range, rw + range);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if(this.tag.Equals("enemyToy")) {
@@ -33,43 +39,58 @@ public class Toy : MonoBehaviour {
 				this.transform.position = projPos;
 			}
 		}
-			
+
 	}
 
 	void OnCollisionEnter(Collision col){
-		//Updates players score when player hits an enemy block
-		if (!(this.tag.Equals ("enemyToy")) &&!col.gameObject.name.Equals ("Enemy") && !col.gameObject.name.Equals ("Toy(Clone)") && !col.gameObject.name.Equals("Ground") && !col.gameObject.name.Equals("SlingShot")) {
-			playerScore += changeInScore;
-			Debug.Log ("player score " + playerScore);
-		}
-		//Updates enemy score when player hits an player block
-		if (!(this.tag.Equals ("playerToy")) &&!col.gameObject.name.Equals ("Enemy") && !col.gameObject.name.Equals ("Toy(Clone)") && !col.gameObject.name.Equals("Ground") && !col.gameObject.name.Equals("SlingShot")) {
-			enemyScore += changeInScore;
-			Debug.Log ("enemy score " + enemyScore);
-		}
-		//Destroys the objects that collided
-		if (!col.gameObject.name.Equals ("Enemy") && !col.gameObject.name.Equals ("Toy(Clone)") && !col.gameObject.name.Equals("Ground") && !col.gameObject.name.Equals("SlingShot")) {
-			Destroy (col.gameObject);
-			Destroy (this.gameObject);
+		//		Debug.Log ("parent tag" + col.transform.parent.gameObject.tag);
+		//		Debug.Log ("this tag " + this.transform.gameObject.tag);
+		Object parent  = col.transform.parent;
 
-		}
+		//string ct = col.transform.parent.gameObject.tag;
+		//string tt = this.transform.gameObject.tag;
+
+
 		//Destroys any object that collides with ground
 		if (col.gameObject.name.Equals ("Ground")) {
 			Destroy (this.gameObject);
-		}
-
-
-	}
-		
-	//Calculates how many friends are added at the end of each level based on players score
-	//enemies score
-	public int CalcNewFriends(int pScore, int eScore) {
-		int numFriends = (pScore - eScore) / 10;
-		if (numFriends > 0) {
-			return numFriends;
 		} else {
-			return 0;
+
+			if (this.transform.gameObject.tag.Equals ("enemyToy") && col.transform.gameObject.tag.Equals ("playerToy")) {
+				//this.GetComponent<Rigidbody>().isKinematic = false;
+				Destroy (col.gameObject);
+				Destroy (this.gameObject);
+			}
+			if (parent != null) {
+				//Updates players score when player hits an enemy block
+				if (this.transform.gameObject.tag.Equals ("playerToy") && col.transform.parent.gameObject.tag.Equals ("enemyBlock")) {
+					//if (!(this.tag.Equals ("enemyToy")) &&!col.gameObject.name.Equals ("Enemy") && !col.gameObject.name.Equals ("Toy(Clone)") && !col.gameObject.name.Equals("Ground") && !col.gameObject.name.Equals("SlingShot")) {
+					GameObject camera = GameObject.Find ("Main Camera");
+					MissionDemolition md = camera.GetComponent<MissionDemolition> ();
+					md.UpdateScore("player", changeInScore);
+					Destroy (col.gameObject);
+					Destroy (this.gameObject);
+				}
+				//Updates enemy score when player hits an player block
+				if (this.transform.gameObject.tag.Equals ("enemyToy") && col.transform.parent.gameObject.tag.Equals ("playerBlock")) {
+					//if (!(this.tag.Equals ("playerToy")) &&!col.gameObject.name.Equals ("Enemy") && !col.gameObject.name.Equals ("Toy(Clone)") && !col.gameObject.name.Equals("Ground") && !col.gameObject.name.Equals("SlingShot")) {
+					GameObject camera = GameObject.Find ("Main Camera");
+					MissionDemolition md = camera.GetComponent<MissionDemolition> ();
+					md.UpdateScore("enemy", changeInScore);
+					Destroy (col.gameObject);
+					Destroy (this.gameObject);
+				}
+				//Destroys the objects that collided
+				//				if (!col.gameObject.name.Equals ("Enemy") && !col.gameObject.name.Equals ("Toy(Clone)") && !col.gameObject.name.Equals ("Ground") && !col.gameObject.name.Equals ("SlingShot")) {
+				//					Destroy (col.gameObject);
+				//					Destroy (this.gameObject);
+				//
+				//				}
+			}
 		}
-			
+
+
 	}
+
+
 }

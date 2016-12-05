@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public enum Gamemode{
 	idle, 
 	playing, 
@@ -22,6 +22,10 @@ public class MissionDemolition : MonoBehaviour {
 	public GameObject playerCastle;
 	public Gamemode mode = Gamemode.idle;
 	public string showing = "Slingshot";
+	public Dictionary<string, int> scores = new Dictionary <string,int> { { "player", 0 }, { "enemy", 0 } };
+	private int[] arcDistance = new int[]{ 250, 500, 500, 500 };
+	private int[] range = new int[]{ 200, 200, 100, 100 };
+	private float[] seconds = new float[]{ 3f, 3f, 3f, 1f };
 
 	// Use this for initialization
 	void Start () {
@@ -56,6 +60,13 @@ public class MissionDemolition : MonoBehaviour {
 		playerCastlePos.x = -enemyCastlePos.x;
 		playerCastle.transform.position = playerCastlePos;
 
+
+		GameObject enemy = GameObject.Find ("Enemy");
+		EnemyAI eai = enemy.GetComponent<EnemyAI> ();
+		eai.secondsBetweenShot = seconds [level];
+		eai.divValue = arcDistance [level];
+		eai.range = range [level];
+
 		shotsTaken = 0;
 		Goal.goalMet = false;
 		ShowGT ();
@@ -66,7 +77,7 @@ public class MissionDemolition : MonoBehaviour {
 		gtLevel.text = "Level: " + (level + 1) + " of " + levelMax;
 		gtScore.text = "Shots Taken: " + shotsTaken;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		ShowGT ();
@@ -75,7 +86,7 @@ public class MissionDemolition : MonoBehaviour {
 			mode  = Gamemode.levelEnd;
 			Invoke ("NextLevel", 2f);
 		}
-	
+
 	}
 	void NextLevel(){
 		level++;
@@ -84,8 +95,24 @@ public class MissionDemolition : MonoBehaviour {
 		}
 		StartLevel ();
 	}
-		
+
 	public static void ShotsFired(){
 		S.shotsTaken++;
+	}
+
+	public void UpdateScore(string name, int scoreChange){
+		scores[name] += scoreChange;
+		Debug.Log (name + "score" + scores[name]);
+	}
+
+	//Calculates how many friends are added at the end of each level based on players score and enemies score
+	public int CalcNewFriends(int pScore, int eScore) {
+		int numFriends = (pScore - eScore) / 10;
+		if (numFriends > 0) {
+			return numFriends;
+		} else {
+			return 0;
+		}
+
 	}
 }
